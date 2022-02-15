@@ -1,0 +1,19 @@
+{
+    "name": "SAD_GOAT_0",
+    "symbol": "SD",
+    "image": "0.png",
+    "properties": {
+        "files": [
+            {
+                "uri": "0.png",
+                "type": "image/png"
+            }
+        ],
+        "creators": [
+            {
+                "address": "Az5ZD194qtEJuxLNEJUFjDtKR26NWy7GQSFhSA3iMbLj",
+                "share": 100
+            }
+        ]
+    }
+}
