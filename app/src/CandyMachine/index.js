@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Connection, PublicKey } from "@solana/web3.js";
 import { Program, Provider, web3 } from "@project-serum/anchor";
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from "@solana/spl-token";
@@ -22,7 +22,7 @@ const opts = {
 
 const CandyMachine = ({ walletAddress }) => {
   const [candyMachine, setCandyMachine] = useState(null);
-  const getCandyMachineState = async () => {
+  const getCandyMachineState = useCallback(async () => {
     const provider = getProvider();
 
     // Get metadata about your deployed candy machine program
@@ -89,7 +89,7 @@ const CandyMachine = ({ walletAddress }) => {
       goLiveDateTimeString,
       presale,
     });
-  };
+  }, []);
 
   useEffect(() => {
     getCandyMachineState();
