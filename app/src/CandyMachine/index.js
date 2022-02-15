@@ -22,25 +22,6 @@ const opts = {
 
 const CandyMachine = ({ walletAddress }) => {
   const [candyMachine, setCandyMachine] = useState(null);
-
-  useEffect(() => {
-    getCandyMachineState();
-  }, []);
-  const getProvider = () => {
-    const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST;
-    // Create a new connection object
-    const connection = new Connection(rpcHost);
-
-    // Create a new Solana provider object
-    const provider = new Provider(
-      connection,
-      window.solana,
-      opts.preflightCommitment
-    );
-
-    return provider;
-  };
-  // Declare getCandyMachineState as an async method
   const getCandyMachineState = async () => {
     const provider = getProvider();
 
@@ -109,6 +90,26 @@ const CandyMachine = ({ walletAddress }) => {
       presale,
     });
   };
+
+  useEffect(() => {
+    getCandyMachineState();
+  }, [getCandyMachineState]);
+  const getProvider = () => {
+    const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST;
+    // Create a new connection object
+    const connection = new Connection(rpcHost);
+
+    // Create a new Solana provider object
+    const provider = new Provider(
+      connection,
+      window.solana,
+      opts.preflightCommitment
+    );
+
+    return provider;
+  };
+  // Declare getCandyMachineState as an async method
+
   const getCandyMachineCreator = async (candyMachine) => {
     const candyMachineID = new PublicKey(candyMachine);
     return await web3.PublicKey.findProgramAddress(
