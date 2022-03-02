@@ -54,7 +54,7 @@ const HowItWorks = ({ address }) => {
             wallet, after its connected go to 
              <span className="inst">
                settings <i class="fa-solid fa-gear"></i> --> Change Network
-            </span>{" "}
+            </span>
             and change it to devnet
           </dd>
         </dl>
@@ -64,7 +64,7 @@ const HowItWorks = ({ address }) => {
             Click on button below to get some sol on your wallet, these are fake
             sol and only available on the devnet dont get too excited. After few
             seconds you should get some sol, enough for you to be able to mint
-            OG
+            OG.Add more funds to your account if you couldnt successfully mint OG 
           </dd>
         </dl>
       </div>
