@@ -20,11 +20,11 @@ const opts = {
   preflightCommitment: "processed",
 };
 
-const CandyMachine = ({ walletAddress }) => {
+const CandyMachine = ({ walletAddress, updateMintedItems }) => {
   const [candyMachine, setCandyMachine] = useState(null);
+  const [loading, setLoading] = useState(false);
   const getCandyMachineState = useCallback(async () => {
     const provider = getProvider();
-
     // Get metadata about your deployed candy machine program
     const idl = await Program.fetchIdl(candyMachineProgram, provider);
 
@@ -80,6 +80,7 @@ const CandyMachine = ({ walletAddress }) => {
         price: candyMachine.data.price,
       },
     });
+    setLoading(false);
 
     console.log({
       itemsAvailable,
@@ -90,7 +91,9 @@ const CandyMachine = ({ walletAddress }) => {
       presale,
     });
   }, []);
-
+  useEffect(() => {
+    updateMintedItems(candyMachine);
+  }, [candyMachine, updateMintedItems]);
   useEffect(() => {
     getCandyMachineState();
   }, [getCandyMachineState]);
@@ -181,7 +184,7 @@ const CandyMachine = ({ walletAddress }) => {
     const userTokenAccountAddress = (
       await getAtaForMint(mint.publicKey, walletAddress.publicKey)
     )[0];
-
+    setLoading(true);
     const userPayingAccountAddress = candyMachine.state.tokenMint
       ? (
           await getAtaForMint(
@@ -389,7 +392,10 @@ const CandyMachine = ({ walletAddress }) => {
       ).txs.map((t) => t.txid);
     } catch (e) {
       console.log(e);
+      setLoading(false);
     }
+    setLoading(false);
+
     return [];
   };
   const renderDropTimer = () => {
@@ -399,28 +405,32 @@ const CandyMachine = ({ walletAddress }) => {
 
     // If currentDate is before dropDate, render our Countdown component
     if (currentDate < dropDate) {
-      console.log("Before drop date!");
       // Don't forget to pass over your dropDate!
       return <CountdownTimer dropDate={dropDate} />;
+    } else {
+      return (
+        <>
+          <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>;
+          <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
+          {!loading && (
+            <button className="mint-button" onClick={mintToken}>
+              Mint NFT
+            </button>
+          )}
+          {loading && <i class="fa fa-spinner" aria-hidden="true"></i>}
+        </>
+      );
     }
-
-    // Else let's just return the current drop date
-    return <p>{`Drop Date: ${candyMachine.state.goLiveDateTimeString}`}</p>;
   };
   return (
     candyMachine &&
     candyMachine.state && (
       <div className="machine-container">
-        {renderDropTimer()}
-        <p>{`Items Minted: ${candyMachine.state.itemsRedeemed} / ${candyMachine.state.itemsAvailable}`}</p>
-        {/* Check to see if these properties are equal! */}
         {candyMachine.state.itemsRedeemed ===
         candyMachine.state.itemsAvailable ? (
           <p className="sub-text">Sold Out 🙊</p>
         ) : (
-          <button className="cta-button mint-button" onClick={mintToken}>
-            Mint NFT
-          </button>
+          renderDropTimer()
         )}
       </div>
     )

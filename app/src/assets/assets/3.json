@@ -1,0 +1,19 @@
+{
+    "name": "ORIGINAL_GOAT_3",
+    "symbol": "SD",
+    "image": "3.png",
+    "properties": {
+        "files": [
+            {
+                "uri": "3.png",
+                "type": "image/png"
+            }
+        ],
+        "creators": [
+            {
+                "address": "Az5ZD194qtEJuxLNEJUFjDtKR26NWy7GQSFhSA3iMbLj",
+                "share": 100
+            }
+        ]
+    }
+}

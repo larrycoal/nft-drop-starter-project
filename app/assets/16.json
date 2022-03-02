@@ -1,0 +1,19 @@
+{
+    "name": "ORIGINAL_GOAT_5",
+    "symbol": "OG",
+    "image": "5.png",
+    "properties": {
+        "files": [
+            {
+                "uri": "5.png",
+                "type": "image/png"
+            }
+        ],
+        "creators": [
+            {
+                "address": "Az5ZD194qtEJuxLNEJUFjDtKR26NWy7GQSFhSA3iMbLj",
+                "share": 100
+            }
+        ]
+    }
+}

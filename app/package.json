@@ -2,6 +2,7 @@
   "name": "candy-drop",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@metaplex/js": "^4.7.0",
     "@project-serum/anchor": "^0.18.2",
@@ -10,9 +11,12 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.26.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
     "react-scripts": "4.0.3",
+    "theblockchainapi": "^1.0.936",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
